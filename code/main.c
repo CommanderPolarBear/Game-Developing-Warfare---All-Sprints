@@ -98,12 +98,14 @@ void RunGame(Character* player, Audio* game_audio, Settings* game_settings, Scen
         
         // Draw game assets to the screen.
         BeginDrawing();
-        BeginMode2D(game_context->camera);
         ClearBackground(BLACK);
+
         if (game_state == GAMEPLAY){
+            BeginMode2D(game_context->camera);
             DrawMap(game_map);
             DrawCharacter(player); 
             DrawTexture(game_scene->vignette, 0, 0, WHITE);
+            EndMode2D();
         } else if (game_state == PAUSE){
             UpdateInteractive(game_interactive, game_settings);
             
@@ -129,7 +131,7 @@ void RunGame(Character* player, Audio* game_audio, Settings* game_settings, Scen
             
             DrawSettings(game_scene, game_settings, game_interactive);
         }
-        EndMode2D();
+
         EndDrawing();
     }
 }
